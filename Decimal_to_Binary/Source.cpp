@@ -1,15 +1,15 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <bitset>
+#include <vector>
 
 using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
 using std::ifstream;
-using std::bitset;
 using std::stoi;
+using std::vector;
 
 int main(int argc, char *argv[])
 {
@@ -42,13 +42,21 @@ int main(int argc, char *argv[])
 		{
 			continue;
 		}
-		// Convert decimal number to binary
-		bitset<16> binary(stoi(line));
-		
-		// Remove leading zeroes 
-		string result = binary.to_string();
-		result.erase(0, result.find_first_not_of('0'));
-		cout << result << endl;
+
+		// Convert number to decimal
+		unsigned int number = stoi(line);
+		vector<unsigned int> my_bits;
+		while (number != 0)
+		{
+			unsigned int bit = number % 2;
+			number /= 2;
+			my_bits.push_back(bit);
+		}
+		for (auto i = my_bits.crbegin(); i < my_bits.crend(); i++)
+		{
+			cout << *i;
+		}
+		cout << endl;
 	}
 
 	return 0;
